@@ -48,11 +48,12 @@ Look at how the project organization was thought.
     |   |   |   __init__.py
     |   |   singleton >
     |   |   |   __init__.py
-    |   |   utils
+    |   |   utils >
     |   |   |   __init__.py
-    |   model
+    |   model >
     |   |   __init__.py
-    |   view
+    |   |   picture.py
+    |   view >
     |   |   __init__.py
     |   __init__.py
     main.py
@@ -60,3 +61,11 @@ Look at how the project organization was thought.
     README.md
     requirements.txt
 ```
+
+# Project Data Model
+
+The file **[```picture.py```](src/model/picture.py)** is the project model class. It is to save data to make required operation. It has the following parameters:
+
+* ```name -> picture file name;```
+* ```source -> picture source, online or local file;```
+* ```save -> the path where the file changed must be saved;```
