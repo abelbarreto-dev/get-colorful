@@ -42,12 +42,14 @@ Look at how the project organization was thought.
     |   |   |   api_deepai.py
     |   |   facade >
     |   |   |   __init__.py
+    |   |   |   facade.py
     |   |   message >
     |   |   |   __init__.py
     |   |   service >
     |   |   |   __init__.py
     |   |   singleton >
     |   |   |   __init__.py
+    |   |   |   sing_facade.py
     |   |   utils >
     |   |   |   __init__.py
     |   model >
