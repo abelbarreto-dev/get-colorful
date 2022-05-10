@@ -1,5 +1,10 @@
 import json
-from requests import post as deep_ai
+from src.model.picture import Picture
+from requests import (
+    post as deep_ai,
+    get as get_img,
+    codes as found,
+)
 
 
 class APIDeepAI:
@@ -15,12 +20,12 @@ class APIDeepAI:
         """
         pass
 
-    def picture_url(self, pict_url: str) -> json:
+    def picture_url(self, picture: Picture) -> json:
         """This mathod takes an image from internet,
         grey scale and transform it.
 
         Args:
-            pict_url (str): url to image.
+            picture (Picture): Picture instance.
 
         Returns:
             json: a json with file required output.
@@ -28,18 +33,18 @@ class APIDeepAI:
         response = deep_ai(
             self.URLAPI,
             data={
-                'image': pict_url,
+                'image': picture.source,
             },
             headers={'api-key': 'quickstart-QUdJIGlzIGNvbWluZy4uLi4K'}
         )
-        return response.json()
+        return self._manager_deeper(response=response, picture=picture)
 
-    def picture_local(self, pict_path: str) -> json:
+    def picture_local(self, picture: Picture) -> json:
         """This mathod takes an image from a local storage,
         grey scale and transform it.
 
         Args:
-            pict_path (str): path to image.
+            picture (Picture): Picture instance.
 
         Returns:
             json: a json with file required output.
@@ -47,8 +52,49 @@ class APIDeepAI:
         response = deep_ai(
             self.URLAPI,
             files={
-                'image': open(pict_path, 'rb'),
+                'image': open(picture.source, 'rb'),
             },
             headers={'api-key': 'quickstart-QUdJIGlzIGNvbWluZy4uLi4K'}
         )
-        return response.json()
+        return self._manager_deeper(response=response, picture=picture)
+
+    # private method - a manager to download types
+
+    def _manager_deeper(self, response: json, picture: Picture) -> bool:
+        """This method is a manager to download local and online.
+
+        Args:
+            response (json): response from a post method.
+            picture (Picture): instance of Picture.
+
+        Returns:
+            bool: True if success else False.
+        """
+        response = json.dumps(response.json())
+        if 'id' not in response:
+            return False
+        else:
+            picture.source = response['output_url']
+            picture.save = f'{picture.save}/{picture.name}'
+        return self._make_download(picture=picture)
+
+    # private method to make download from image
+
+    def _make_download(self, picture: Picture) -> bool:
+        """This method is used to try make download from image and
+        return a boolean value to inform user.
+
+        Args:
+            picture (Picture): instance of Picture.
+
+        Returns:
+            bool: True if downloaded else False.
+        """
+        response = get_img(url=picture.source, stream=True)
+        if response.status_code == found.OK:
+            with open(file=picture.save, mode='wb') as writer:
+                for byte in response.iter_content(chunk_size=256):
+                    writer.write(byte)
+            return True
+        else:
+            return False
