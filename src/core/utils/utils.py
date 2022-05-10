@@ -1,5 +1,6 @@
 from os.path import isdir, isfile
 from requests import get
+from requests.exceptions import MissingSchema
 from src.model.picture import Picture
 
 
@@ -51,8 +52,11 @@ def isiturl(url: str) -> bool:
     Returns:
         bool: True if it is a URL else False.
     """
-    codes = get(url=url).status_code
-    return False if not isinstance(url, str) else codes == 200
+    try:
+        codes = get(url=url).status_code
+        return False if not isinstance(url, str) else codes == 200
+    except MissingSchema:
+        return False
 
 
 def get_name(wordpath: str) -> str:

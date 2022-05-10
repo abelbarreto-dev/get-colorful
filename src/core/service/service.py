@@ -103,7 +103,7 @@ class Service:
         # cleaning message
         SMG.message().clear_msg()
         # checks if instance is Picture, if it isn't, return False
-        if not instanceok(picture=Picture):
+        if not instanceok(picture=picture):
             SMG.message().warning = True
             SMG.message().title = 'Warning - Invalid Instance'
             SMG.message().text = 'Warning! Instance must be Picture'
@@ -114,18 +114,18 @@ class Service:
             SMG.message().title = 'Warning - Invalid Directory'
             SMG.message().text = 'Warning! Directory Invalid to Save'
             return False
-        # save directory ok ## if it is not a local or online file
-        if not picture.online:
-            if not isitfile(file=picture.source):
+        # save directory ok ## if it is not an online or local file
+        if picture.online:
+            if not isiturl(url=picture.source):
                 SMG.message().warning = True
                 SMG.message().title = 'Warning - Local File'
                 SMG.message().text = 'Warning! Local File Not Found'
                 return False
         else:
-            if not isiturl(url=picture.source):
+            if not isitfile(file=picture.source):
                 SMG.message().warning = True
-                SMG.message().title = 'Warning - Online File'
-                SMG.message().text = 'Warning! URL File Not Found'
+                SMG.message().title = 'Warning - Local File'
+                SMG.message().text = 'Warning! Local File Not Found'
                 return False
         # file path (local or online) ok ## if user don't put on name
         # inserts it ### success

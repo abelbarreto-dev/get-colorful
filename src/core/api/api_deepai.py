@@ -35,7 +35,7 @@ class APIDeepAI:
             data={
                 'image': picture.source,
             },
-            headers={'api-key': 'quickstart-QUdJIGlzIGNvbWluZy4uLi4K'}
+            headers={'api-key': '6d8ff185-4701-4545-82f5-a81c4352f453'}
         )
         return self._manager_deeper(response=response, picture=picture)
 
@@ -54,7 +54,7 @@ class APIDeepAI:
             files={
                 'image': open(picture.source, 'rb'),
             },
-            headers={'api-key': 'quickstart-QUdJIGlzIGNvbWluZy4uLi4K'}
+            headers={'api-key': '6d8ff185-4701-4545-82f5-a81c4352f453'}
         )
         return self._manager_deeper(response=response, picture=picture)
 
@@ -70,7 +70,7 @@ class APIDeepAI:
         Returns:
             bool: True if success else False.
         """
-        response = json.dumps(response.json())
+        response = response.json()
         if 'id' not in response:
             return False
         else:
