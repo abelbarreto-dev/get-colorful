@@ -45,11 +45,14 @@ Look at how the project organization was thought.
     |   |   |   facade.py
     |   |   message >
     |   |   |   __init__.py
+    |   |   |   message.py
     |   |   service >
     |   |   |   __init__.py
+    |   |   |   service.py
     |   |   singleton >
     |   |   |   __init__.py
     |   |   |   sing_facade.py
+    |   |   |   sing_message.py
     |   |   utils >
     |   |   |   __init__.py
     |   model >
