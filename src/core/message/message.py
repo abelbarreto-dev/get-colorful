@@ -10,11 +10,12 @@ class Message:
             - error: bool
             - success: bool
             - text: str
+            _ title: str
 
         Methods:
             - clear_msg() :: to clear data instance.
         """
-        self._text = ''
+        self._text = self._title = ''
         self._warning = self._error = self._success = False
 
     @property
@@ -24,6 +25,14 @@ class Message:
     @text.setter
     def text(self, text: str) -> None:
         self._text = text
+
+    @property
+    def title(self) -> str:
+        return self._title
+
+    @title.setter
+    def text(self, title: str) -> None:
+        self._title = title
 
     @property
     def warning(self) -> bool:
@@ -53,5 +62,5 @@ class Message:
         """This method has the function only delete
         all current data from it instance.
         """
-        self.text = ''
+        self.text = self.title = ''
         self.warning = self.error = self.success = False
