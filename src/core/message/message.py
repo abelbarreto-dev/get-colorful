@@ -34,7 +34,7 @@ class Message:
         return self._title
 
     @title.setter
-    def text(self, title: str) -> None:
+    def title(self, title: str) -> None:
         self._title = title
 
     @property
