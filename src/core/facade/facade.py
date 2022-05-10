@@ -1,9 +1,12 @@
 from src.model.picture import Picture
+from src.core.service.service import Service
 
 
 class Facade:
     """Project Facade Class to access back-end.
     """
+
+    _service = Service()
 
     def __init__(self) -> None:
         """New Facade.
@@ -19,7 +22,7 @@ class Facade:
         Returns:
             bool: True if it be a success else False.
         """
-        pass
+        return self._service.swap_picture_url(picture=picture)
 
     def swap_picture_local(self, picture: Picture) -> bool:
         """This function takes a grey scale picture local file and swap to colorful.
@@ -30,4 +33,4 @@ class Facade:
         Returns:
             bool: True if it be a success else False.
         """
-        pass
+        return self._service.swap_picture_local(picture=picture)
