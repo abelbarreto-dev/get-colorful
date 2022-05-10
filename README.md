@@ -64,7 +64,7 @@ Look at how the project packages organization was thought.
     |   |   picture.py
     |   view >
     |   |   __init__.py
-    tests > # testing folder
+    tests > # to test, run "pytest" here
     |   download > # (not pushed) it belongs to tests only
     |   images >
     |   |   __init__.py
@@ -88,6 +88,7 @@ The file **[```picture.py```](src/model/picture.py)** is the project model class
 * ```name -> picture file name;```
 * ```source -> picture source, online or local file;```
 * ```save -> the path where the file changed must be saved;```
+* ```online -> boolean to switch between online or local file;```
 
 # Testing Project
 
