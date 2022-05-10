@@ -55,6 +55,7 @@ Look at how the project organization was thought.
     |   |   |   sing_message.py
     |   |   utils >
     |   |   |   __init__.py
+    |   |   |   utils.py
     |   model >
     |   |   __init__.py
     |   |   picture.py
