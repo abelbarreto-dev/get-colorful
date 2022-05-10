@@ -32,7 +32,8 @@ class Service:
         """
         if not self._check_data_picture(picture=picture):
             return False
-        return self._check_success(func=self.deepai.picture_url, picture=picture)
+        return self._check_success(
+            func=self.deepai.picture_url, picture=picture)
 
     def swap_picture_local(self, picture: Picture) -> bool:
         """This function takes a grey scale picture local file and swap to colorful.
@@ -45,7 +46,8 @@ class Service:
         """
         if not self._check_data_picture(picture=picture):
             return False
-        return self._check_success(func=self.deepai.picture_local, picture=picture)
+        return self._check_success(
+            func=self.deepai.picture_local, picture=picture)
 
     # private methods
 
