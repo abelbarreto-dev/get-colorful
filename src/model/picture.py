@@ -11,6 +11,8 @@ class Picture:
         self._source = ''
         # where the converted picture must save
         self._save = ''
+        # it is used to switch online and local
+        self._online = False
 
     @property
     def name(self) -> str:
@@ -35,3 +37,11 @@ class Picture:
     @save.setter
     def save(self, save: str) -> None:
         self._save = save
+
+    @property
+    def online(self) -> bool:
+        return self._online
+
+    @online.setter
+    def online(self, online: bool) -> None:
+        self._online = online
