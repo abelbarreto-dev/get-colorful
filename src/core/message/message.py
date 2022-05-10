@@ -1,3 +1,6 @@
+import json
+
+
 class Message:
     """It class is a model of data to inform user about
     """
@@ -64,3 +67,19 @@ class Message:
         """
         self.text = self.title = ''
         self.warning = self.error = self.success = False
+
+    def get_json(self) -> json:
+        """This method returns a json.
+
+        Returns:
+            json: json with desired data.
+        """
+        return json.dumps(
+            {
+                'title': self.title,
+                'text': self.text,
+                'warning': self.warning,
+                'error': self.error,
+                'success': self.success,
+            }
+        )
