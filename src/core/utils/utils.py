@@ -77,3 +77,26 @@ def get_name(wordpath: str) -> str:
         wordpath.reverse()
         wordpath = ''.join(wordpath)
     return '' if '.' not in wordpath else wordpath
+
+
+def get_error_success(key: str) -> dict:
+    """This fuction is for return a model msg to
+    success or error messages.
+
+    Args:
+        key (str): key to a dict.
+
+    Returns:
+        dict: a dict_keys(text, title) if key in dc_msg else None.
+    """
+    dc_msg = {
+        'success': {
+            'text': 'Success! {} Image Converted', 
+            'title': 'Success - {} Image'
+        },
+        'error': {
+            'text': 'Error! {} Image Not Converted',
+            'title': 'Error - {} Image'
+        },
+    }
+    return dc_msg[key] if key in dc_msg else None

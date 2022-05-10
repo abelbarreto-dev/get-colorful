@@ -20,7 +20,7 @@ class APIDeepAI:
         """
         pass
 
-    def picture_url(self, picture: Picture) -> json:
+    def picture_url(self, picture: Picture) -> bool:
         """This mathod takes an image from internet,
         grey scale and transform it.
 
@@ -28,7 +28,7 @@ class APIDeepAI:
             picture (Picture): Picture instance.
 
         Returns:
-            json: a json with file required output.
+            bool: True if it be a success else False.
         """
         response = deep_ai(
             self.URLAPI,
@@ -39,7 +39,7 @@ class APIDeepAI:
         )
         return self._manager_deeper(response=response, picture=picture)
 
-    def picture_local(self, picture: Picture) -> json:
+    def picture_local(self, picture: Picture) -> bool:
         """This mathod takes an image from a local storage,
         grey scale and transform it.
 
@@ -47,7 +47,7 @@ class APIDeepAI:
             picture (Picture): Picture instance.
 
         Returns:
-            json: a json with file required output.
+            bool: True if it be a success else False.
         """
         response = deep_ai(
             self.URLAPI,

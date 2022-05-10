@@ -2,7 +2,8 @@ from src.core.api.api_deepai import APIDeepAI
 from src.model.picture import Picture
 from src.core.singleton.sing_message import SingMessage as SMG
 from src.core.utils.utils import (
-    instanceok, isdirect, isitfile, isiturl, get_name
+    instanceok, isdirect, isitfile, isiturl,
+    get_name, get_error_success as getmsg
 )
 
 
@@ -31,6 +32,7 @@ class Service:
         """
         if not self._check_data_picture(picture=picture):
             return False
+        return self._check_success(func=self.deepai.picture_url, picture=picture)
 
     def swap_picture_local(self, picture: Picture) -> bool:
         """This function takes a grey scale picture local file and swap to colorful.
@@ -43,6 +45,36 @@ class Service:
         """
         if not self._check_data_picture(picture=picture):
             return False
+        return self._check_success(func=self.deepai.picture_local, picture=picture)
+
+    # private methods
+
+    def _check_success(self, func, picture: Picture) -> bool:
+        """It takes a function and a Picture instance that can
+        be used by antoher two public methods to abstract dada.
+
+        Args:
+            func (function): wished function.
+            picture (Picture): instance of Picture.
+
+        Returns:
+            bool: True if success else False.
+        """
+        SMG.message().clear_msg()
+        if func(picture=picture):
+            SMG.message().success = True
+        else:
+            SMG.message().error = True
+        key_msg = 'success' if SMG.message().success else 'error'
+        key_msg = getmsg(key=key_msg)
+        if picture.online:
+            SMG.message().title = key_msg['title'].format('URL')
+            SMG.message().text = key_msg['text'].format('URL')
+            return True if SMG.message().success else False
+        else:
+            SMG.message().title = key_msg['title'].format('Local')
+            SMG.message().text = key_msg['text'].format('Local')
+            return True if SMG.message().success else False
 
     def _check_data_picture(self, picture: Picture) -> bool:
         """This method makes validation data from picture.
