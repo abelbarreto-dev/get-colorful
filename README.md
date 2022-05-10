@@ -13,6 +13,7 @@ What was used to do this project, libraries and API's.
 * idna 3.3
 * requests 2.27.1
 * urllib3 1.26.9
+* pytest 7.1.2
 
 You can found that list at [requirements.txt](requirements.txt), to install that, please run: <code>pip install -r requirements.txt</code>.
 
