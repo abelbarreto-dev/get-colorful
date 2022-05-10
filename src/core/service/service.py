@@ -1,3 +1,4 @@
+import json
 from src.core.api.api_deepai import APIDeepAI
 from src.model.picture import Picture
 from src.core.singleton.sing_message import SingMessage as SMG
@@ -21,21 +22,26 @@ class Service:
     def deepai(self) -> APIDeepAI:
         return self._deepai
 
-    def swap_picture_url(self, picture: Picture) -> bool:
+    def swap_picture_url(self, picture: Picture) -> json:
         """This function takes a grey scale picture url and swap to colorful.
 
         Args:
             picture (Picture): Picture instance with all required data.
 
         Returns:
-            bool: True if it be a success else False.
+            json: A json with all need information.
         """
+        result = None
         if not self._check_data_picture(picture=picture):
-            return False
-        return self._check_success(
-            func=self.deepai.picture_url, picture=picture)
+            pass
+        else:
+            self._check_success(func=self.deepai.picture_url, picture=picture)
+        # get json and clean Message
+        result = SMG.message().get_json()
+        SMG.message().clear_msg()
+        return result
 
-    def swap_picture_local(self, picture: Picture) -> bool:
+    def swap_picture_local(self, picture: Picture) -> json:
         """This function takes a grey scale picture local file and swap to colorful.
 
         Args:
@@ -44,10 +50,16 @@ class Service:
         Returns:
             bool: True if it be a success else False.
         """
+        result = None
         if not self._check_data_picture(picture=picture):
-            return False
-        return self._check_success(
-            func=self.deepai.picture_local, picture=picture)
+            pass
+        else:
+            self._check_success(
+                func=self.deepai.picture_local, picture=picture)
+        # get json and clean Message
+        result = SMG.message().get_json()
+        SMG.message().clear_msg()
+        return result
 
     # private methods
 
